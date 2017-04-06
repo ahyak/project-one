@@ -1,0 +1,101 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 950px;
+    height: 651px;
+}
+.container {
+  margin: auto;
+  font-family: 'Gloria Hallelujah', cursive;
+  text-align: center;
+}
+
+.card {
+  width: 150px;
+  height: 250px;
+  background-color: #dff5a3;
+  border-radius: 5px;
+  display: inline-block;
+  margin-right: 5px;
+  margin-top: 30px;
+}
+.card img {
+  display: none;
+  /*opacity: 0;*/
+}
+
+.frontside {
+  width: 150px;
+  height: 250px;
+  background-color: white;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.backside {
+  width: 150px;
+  height: 250px;
+  background: white;
+  border-radius: 5px;
+  border-style: none;
+  border-width: none;
+  display: inline-block;
+  /*opacity: 1;*/
+}
+.backside img {
+  display: initial;
+  /*opacity: initial;*/
+}
+
+img {
+  width: 150px;
+  height: 250px;
+}
+
+.timer{
+  width: 100px;
+  height:100px;
+}
+
+.scoreboard {
+  width: 200px;
+  height:200px;
+  /*float:right;*/
+  margin: 0 auto;
+}
+
+.matched {
+  opacity: 0.5;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.welcomepage {
+  background-color: lightblue;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+}
+h1 {
+  font-size: 82px;
+  text-align: center;
+  color: white;
+  margin-top: 60px;
+}
