@@ -2,12 +2,12 @@ var exposeTime = 1000
 
 // create an object array with all images used in the game
 var animals = [
-  { name: 'Maroon Giraffe', image: '<img src="giraffe/maroon-giraffe.jpg" alt="maroon-giraffe">'},
-  { name: 'Yellow Giraffe', image: '<img src="giraffe/yellow-giraffe.jpg" alt="yellow-giraffe">'},
-  { name: 'Orange Giraffe', image: '<img src="giraffe/orange-giraffe.jpg" alt="orange-giraffe">' },
-  { name: 'Neutral Giraffe', image: '<img src="giraffe/neutral-giraffe.jpg" alt="neutral-giraffe">'},
-  { name: 'Redbrown Giraffee', image: '<img src="giraffe/redbrown-giraffe.jpg" alt="redbrown-giraffe">'},
-  { name: 'Brown Giraffee', image: '<img src="giraffe/brown-giraffe.jpg" alt="brown-giraffe">'}
+  { name: 'Maroon Giraffe', image: '<img src="giraffe/imgbk/maroon-giraffe.jpg" alt="maroon-giraffe">'},
+  { name: 'Yellow Giraffe', image: '<img src="giraffe/imgbk/yellow-giraffe.jpg" alt="yellow-giraffe">'},
+  { name: 'Orange Giraffe', image: '<img src="giraffe/imgbk/orange-giraffe.jpg" alt="orange-giraffe">' },
+  { name: 'Neutral Giraffe', image: '<img src="giraffe/imgbk/neutral-giraffe.jpg" alt="neutral-giraffe">'},
+  { name: 'Redbrown Giraffee', image: '<img src="giraffe/imgbk/redbrown-giraffe.jpg" alt="redbrown-giraffe">'},
+  { name: 'Brown Giraffee', image: '<img src="giraffe/imgbk/brown-giraffe.jpg" alt="brown-giraffe">'}
 ];
 
 // double the animals
