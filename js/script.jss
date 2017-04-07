@@ -13,30 +13,14 @@ var animals = [
 // double the animals
 animals = animals.concat(animals);
 
-//create an empty array, and push 2 of each image
- // var selectedAnimals = [];
- //  for (i = 0; i < animals.length; i= i+1) {
- //   var listOfAnimals = animals[i].image
- //    selectedAnimals.push(listOfAnimals);
- //    selectedAnimals.push(listOfAnimals);
- //  }
-
-
-
-
-
-
-
+//setting game players (two players)
 var game = {
-  player1: {time: "0", name: "player1"},
-  player2: {time: "0", name: "player2"}
+  player1: {time: "", name: "player1"},
+  player2: {time: "", name: "player2"}
 }
 var currentPlayer = game.player1
-var numFlipped = 0;
-var firstCard;
-var counter = 0;
+var matches = 0; //checks number of matches
 var cardSelected = null;
-var lastClicked =null;
 var $cards = null
 var $faceup = null
 var $facedown = null
@@ -44,61 +28,34 @@ var myInterval = null
 
 // $('.scoreboard').append('<h1>player1</h1>')
 // $('.scoreboard').append('<h1>player2</h1>')
+// setTimeout(function(){
+        // console.log(cardSelected)
+      // },1000)
 
-
-
-
-
-
-
-// $cards.on('click', function(){
-//   console.log($(this).find("img").attr('src'))
-//   if (!cardSelected) {
-//     cardSelected = $(this).find("img").attr('src')
-//   } else {
-//     var matched = (cardSelected == $(this).find("img").attr('src'))
-//       if (matched) {
-//         var matchedDivs = $('img[src="' +cardSelected+'"]').parent()
-//         matchedDivs.unbind('click');
-//         matchedDivs.animate({opacity:0.5})
-//         score++;
-//       } else {
-//         alert("Sorry! Try again!");
-//     }
-
+//activating clicks on cards function
 function activateCards() {
   $cards.not('.matched').on('click', function(){
     $(this).toggleClass('backside')
-    console.log($(this).find("img").attr('src'));
+    // console.log($(this).find("img").attr('src'));
     if (!cardSelected) {
       cardSelected = $(this)
       $(this).off()
-      //.find("img").attr('src')
-      // $(this).toggleClass('backside')
-        // if (cardSelected.hasClass('backside')) {
-          // $(this).unbind('click');
-        // } else if(!cardSelected.hasClass('backside')) {
-          // $(this).bind('click');
+      console.log(cardSelected)
     } else {
       deactivateCards()
       var matched = (cardSelected.find("img").attr('src') == $(this).find("img").attr('src'))
       // console.log(cardSelected.find("img").attr('src') == $(this).find("img").attr('src'));
-
         if (matched) {
-
-          // cardSelected !== $(this)
-          // var matchedDivs = $('img[src="' +cardSelected+'"]').parent()
-          // cardSelected.unbind('click');
           // cardSelected.animate({opacity:0.5})
           cardSelected.addClass("matched")
-          // $(this).unbind('click');
           // $(this).animate({opacity:0.5})
           $(this).addClass("matched")
           activateCards()
-          counter++;
+          matches++;
           checkMatchingCards(myInterval)
         } else {
           var secondCard = $(this)
+          console.log(secondCard);
             $(cardSelected).addClass('backside')
             $(this).addClass('backside')
             setTimeout(function(){
@@ -109,59 +66,25 @@ function activateCards() {
               activateCards()
               // console.log(secondCard)
             }, exposeTime)
-
-            // console.log($(cardSelected).removeClass('backside'));
             // $(this).removeClass('backside')
           console.log("Sorry! Try again!");
       }
-      // setTimeout(function(){
         cardSelected = null
-        console.log(cardSelected)
-      // },1000)
     }
-
-    // }
   });
+
 }
 
 function deactivateCards() {
   $cards.off()
 }
-// $($faceup).on('click', function() {
-//   if (numFlipped < 2) {
-//     // var currentCard = selectedAnimals.pop();
-//     $(this).toggleClass("backside");
-//     // $(this).html(currentCard);
-//     numFlipped++;
-//     $(this).unbind('click');
-//       if (numFlipped == 0) {
-//       firstCard = currentCard
-//       console.log(firstCard)
-//       } else {
-//       firstCard == currentCard
-//       console.log(firstCard == currentCard)
-//       if (firstCard == currentCard) {
-//         // console.log("Sucess! We have a match");
-//         // $(this).fadeOut( "slow" );
-//         // score++;
-//       // }else {// success. we have a match. write code for that. .toggleClass('f')
-//       //remove cells
-//       //bind click back all other cells
-//       // console.log("Sorry! Try again!")
-//       // $(this).toggleClass("frontside");
-//       }
-//     }//close else
-//   }//end of if statement
-//   // $(this).unbind( "click" );
-// });//end of click function
 
 
-//start time using start button
+//start time +game using start button
 var time = 0;
-$('.start-game').on('click', function () {
+
+function startRound() {
   $('#board').empty()
-
-
   shuffleArray(animals);
 
   for (var i = 0; i < animals.length; i++) {
@@ -169,45 +92,57 @@ $('.start-game').on('click', function () {
   }
 
   $cards = $('.card')
-  $faceup = $('.frontside')
+  // $faceup = $('.frontside')
   $facedown = $('.backside')
 
   myInterval = setInterval(function() {
     $('.timer').text(++time + ' Seconds');
   }, 1000);
-  $('.p1-score').innerText = 'Player 1 Score: ' + time
+  // $('.p1-score').innerText = 'Player 1 Score: ' + time
   activateCards()
   checkMatchingCards(myInterval)
-});// to stop the time--clearInterval(myInterval);
+}
+
+$('.start-game').one('click', startRound);// to stop the time--clearInterval(myInterval);
 
 function checkMatchingCards(func) {
-  // for (var i = 0; i < selectedAnimals.length; i++) {
-  //   selectedAnimals[i].id = i
-  //   $faceup[i].innerHTML = selectedAnimals.pop()[i].image
-  // }
-  if(counter == 6){
+  if(matches == 6){
     currentPlayer.time = time
     console.log(currentPlayer);
-    console.log('time is over!')
+    console.log(currentPlayer.time);
+    console.log('time is over!');
     clearInterval(func);
-    currentPlayer = game.player2
-    console.log(currentPlayer);
-    switchingPlayers();
+    switchPlayers();
   }
-
 };
 
 //create a function to switch between players
-function switchingPlayers() {
-  $('.start-game').html("Player 2!")
+function switchPlayers() {
   $cards.removeClass('backside')
   $cards.removeClass('matched')
   $cards.off();
-  // $cards.on('click');
-  console.log(time);
-  counter = 0
+    if (currentPlayer == game.player1) {
+      currentPlayer = game.player2
+    } else {
+      checkWinner();
+      currentPlayer = game.player1
+    }
+    $('.start-game').html(currentPlayer.name)
+    $('.start-game').one('click', startRound);
+  matches = 0
   time = 0
-}
+};
+
+function checkWinner(){
+  if (game.player1.time > game.player2.time){
+    alert('player 2 wins!')
+  }else if (game.player1.time === game.player2.time){
+    alert('it\'s a tie!')
+  } else {
+    alert("player 1 wins!")
+  }
+};
+
 
 //create a function to randomly shuffle the images
 function shuffleArray(array){
