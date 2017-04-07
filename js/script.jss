@@ -118,9 +118,11 @@ function checkMatchingCards(func) {
 
 //create a function to switch between players
 function switchPlayers() {
+  setTimeout(function() {
   $cards.removeClass('backside')
   $cards.removeClass('matched')
   $cards.off();
+  }, exposeTime)
     if (currentPlayer == game.player1) {
       currentPlayer = game.player2
     } else {
